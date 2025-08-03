@@ -1,0 +1,135 @@
+<!-- Create one single dynamic blog view page: 
+ blog-post.html that shows full content when "Read More" is clicked.
+ A single blog-post.html page that dynamically displays each full post. -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lake City Creatives Arts</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <section id="header">
+            <a href="#"><img src="img/logo.png" class="logo" alt="logo"></a>
+            <div>
+                <ul id="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="shop.html">Shop <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="shop.html?category=men">Men</a></li>
+                            <li><a href="shop.html?category=women">Women</a></li>
+                            <li><a href="shop.html?category=kids">Kids</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="active" href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li id="lg-bag">
+                    <a href="cart.html">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                    </li>
+                    <a href="#" id="close"><i class="fa fa-times"></i></a>
+                </ul>  
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="fa fa-shopping-bag"></i></a>
+                <i id="bar" class="fa fa-outdent"></i>
+            </div>
+        </section>   
+        <section id="blog-post" class="section-p1">
+            <div id="post-container">
+                <h2>Loading...</h2>
+            </div>
+        </section>
+         <section id="newsletter" class="section-p1 section-m1">
+            <div class="newstext">
+                <h4>Sign Up for Newsletter</h4>
+                <p>Get E-mail updates about our latest products and <span>special offers</span>.</p>
+            </div>
+            <!-- <div class="form">
+                <input type="text" placeholder="Enter your email address">
+                <button class="normal">Sign Up</button>
+            </div> -->
+           <div class="form">
+                <input type="email" id="newsletter-email" placeholder="Enter your email address" required>
+                <button class="normal" onclick="submitEmail()">Sign Up</button>
+            </div>
+            <p id="newsletter-message" style="margin-top: 10px; color: green;"></p>
+        </section>
+        <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="img/logo.png" alt="logo">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> Riat, Opposite Kisumu Int. Airport</p>
+                <p><strong>Phone:</strong> +254728000000</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow Us</h4>
+                    <div class="icon">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="#">View Cart</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track My Order</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="img/appstore.png" alt="App Store">
+                    <img src="img/google.png" alt="Google Play">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="img/paymentmethod.png" alt="Payment Methods">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025, Lake City Creatives Arts. All rights reserved.</p>
+            </div>
+        </footer>
+
+  <script src="blogPosts.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get("id");
+    const post = blogPosts.find(b => b.id === postId);
+
+    const container = document.getElementById("post-container");
+
+    if (post) {
+      container.innerHTML = `
+       <a href="blog.html" style="color: #088178;">← Back to Blog</a>
+        <h2>${post.title}</h2>
+        
+        <img src="${post.image}" alt="${post.title}" style="max-width:100%;margin:20px 0;">
+        ${post.fullContent}
+        <br>
+      `;
+    } else {
+      container.innerHTML = "<h2>Post Not Found</h2>";
+    }
+  </script>
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lake City Creatives Arts</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>    
+    <body>
+        <section id="header">
+            <a href="#"><img src="img/logo.png" class="logo" alt="logo"></a>
+            <div>
+                <ul id="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="shop.html">Shop <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="shop.html?category=men">Men</a></li>
+                            <li><a href="shop.html?category=women">Women</a></li>
+                            <li><a href="shop.html?category=kids">Kids</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li id="lg-bag">
+                    <a class="active" href="cart.html">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                    </li>
+                    <a href="#" id="close"><i class="fa fa-times"></i></a>
+                </ul>  
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="fa fa-shopping-bag"></i></a>
+                <i id="bar" class="fa fa-outdent"></i>
+            </div>
+        </section>   
+         <section id="contact-header">
+            <h2>Happy Shopping...</h2>
+            <p>Pick everything nice!</p>
+         </section>  
+        <section id="cart" class="section-p1">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <td>Remove</td>
+                        <td>Image</td>
+                        <td>Name</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Size</td>
+                        <td>Subtotal</td>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    
+                </tbody>
+            </table>
+        </section>
+        <section id="cart-add" class="section-p1">
+            <div id="coupon">
+                <h3>Apply Coupon</h3>
+                <div>
+                    <!-- <input type="text" id="coupon-code" placeholder="Enter Your Coupon">
+                    <button class="normal" onclick="applyCoupon()">Apply</button> -->
+                </div>
+                <p id="coupon-message" style="margin-top: 10px;"></p>
+            </div>
+    
+            <div id="subtotal">
+                <h3>Cart Total</h3>
+                <table>
+                    <tr>
+                        <td>Cart Subtotal</td>
+                        <td id="cart-subtotal">Ksh. 0</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Shipping
+                            <br>
+                            <select id="shipping-region" onchange="updateCartTotal()">
+                            <option>Select Location</option>
+                            <option value="kisumu">Kisumu County</option>
+                            <option value="kenya">Other Kenyan Counties</option>
+                            <option value="international">Outside Kenya</option>
+                            </select>
+                        </td>
+                         <td id="shipping-cost">Ksh. 0</td>
+                    </tr>
+                       
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td ><strong id="cart-total">Ksh. 0</strong></td>
+                    </tr>
+                </table>
+                <button class="normal" onclick="window.location.href='checkout.html'">Proceed to checkout</button>
+            </div>
+
+        </section>
+        
+        <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="img/logo.png" alt="logo">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> Riat, Opposite Kisumu Int. Airport</p>
+                <p><strong>Phone:</strong> +254728000000</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow Us</h4>
+                    <div class="icon">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="#">View Cart</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track My Order</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="img/appstore.png" alt="App Store">
+                    <img src="img/google.png" alt="Google Play">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="img/paymentmethod.png" alt="Payment Methods">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025, Lake City Creatives Arts. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script>
+            function loadCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItemsContainer = document.getElementById("cart-items");
+            cartItemsContainer.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = "<tr><td colspan='6'>Your cart is empty.</td></tr>";
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                const row = `
+                <tr>
+                    <td><a href="#" onclick="removeFromCart(${index})"><i class="fa fa-times-circle"></i></a></td>
+                    <td><a href="sproduct.html?id=${item.id}">
+                        <img src="${item.image}" width="50" alt="${item.name}">
+                        </a>
+                    </td>
+                    <td>${item.name}</td>
+                    <td>Ksh ${item.price}</td>
+                    <td>
+                        <input type="number" id="product-quantity" min="1" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)" style="width: 60px; padding: 5px;">
+                    </td>
+                    <td>${item.size}</td>
+                    <td>Ksh ${subtotal}</td>
+                </tr>
+                `;
+                cartItemsContainer.innerHTML += row;
+            });
+
+            updateCartCount(); 
+            updateCartTotal(); 
+            autoApplyBestCoupon();
+            }
+
+            function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart(); // location.reload(); Refresh the page to update cart items
+            updateCartCount(); 
+            updateCartTotal(); 
+            /* Update badge count. Even though you're calling  loadCart(); /location.reload(), 
+            still keep updateCartCount() in case the page doesn't reload fast or the reload fails. */
+            }
+
+            window.onload = loadCart;
+
+            /*input for quantity on cart.html to handle quantity change. The quantity becomes editable via a number input.
+            When the user changes the quantity, the cart updates live.
+            The subtotal reflects the new quantity.
+            The cart badge stays accurate. */
+            function updateQuantity(index, newQuantity) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const quantity = parseInt(newQuantity);
+            const quantityInput = document.getElementById("product-quantity"); //When a user puts 0 it doesn't allow.
+            
+            if (isNaN(quantity) || quantity < 1) {
+            alert("Please enter a valid quantity of 1 or more."); //alerts users when they input 0 on quantity.
+            return;
+            }
+
+            if (isNaN(quantity) || quantity < 1) return;
+
+            cart[index].quantity = quantity;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+            updateCartCount();
+            updateCartTotal(); 
+            autoApplyBestCoupon();
+            }
+
+            let appliedDiscount = 0;
+
+            function getShippingCost(region) {
+                switch (region) {
+                    case 'kisumu': return 100;
+                    case 'kenya': return 300;
+                    case 'international': return 0; // handled with message instead
+                    default: return 0;
+                }
+            }
+            // function to update the cart totals: when you change the quantity,remove an item and when the page first loads etc.
+            // You must call updateCartTotal(); in other functions for it to be effective
+            function updateCartTotal() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+
+                const region = document.getElementById("shipping-region").value;
+                let shipping = getShippingCost(region);
+                let shippingText = `Ksh. ${shipping}`;
+
+                if (region === 'international') shippingText = 'To be discussed';
+
+                let discountedTotal = subtotal;
+                if (appliedDiscount > 0) {
+                    discountedTotal = subtotal - (subtotal * appliedDiscount);
+                }
+
+                document.getElementById("cart-subtotal").textContent = `Ksh. ${subtotal.toFixed(2)}`;
+                document.getElementById("shipping-cost").textContent = shippingText;
+                document.getElementById("cart-total").textContent =
+                    region === 'international'
+                        ? 'To be discussed'
+                        : `Ksh. ${(discountedTotal + shipping).toFixed(2)}`; //This change ensures the final "Total" reflects the discount.
+            }
+
+            //About coupons
+
+            function autoApplyBestCoupon() {
+                //const code = document.getElementById("coupon-code").value.trim().toUpperCase();
+                const message = document.getElementById("coupon-message");
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+                //Complex Logic – e.g., Minimum Order Value. Modify the coupon rules
+                const coupons = {
+                    "SAVE10": { discount: 0.10, minSubtotal: 5000 },
+                    "SAVE20": { discount: 0.20, minSubtotal: 9900 },
+                    //"FREESHIP": { discount: 0 } // could set a separate flag for shipping
+                };
+                 let bestCoupon = null;
+
+                for (const code in coupons) {
+                    const { discount, minSubtotal } = coupons[code];
+                    if (subtotal >= minSubtotal) {
+                        if (!bestCoupon || discount > coupons[bestCoupon].discount) {
+                            bestCoupon = code;
+                        }
+                    }
+                }
+
+                if (bestCoupon) {
+                    const { discount } = coupons[bestCoupon];
+                    appliedDiscount = discount;
+                    localStorage.setItem("appliedCoupon", JSON.stringify({ code: bestCoupon, discount }));
+
+                    alert(`Good news! You've qualified for the "${bestCoupon}" coupon. It's been applied automatically.`);
+                    message.style.color = "green";
+                    message.textContent = `Coupon "${bestCoupon}" applied automatically.`;
+                } else {
+                    appliedDiscount = 0;
+                    localStorage.removeItem("appliedCoupon");
+                    message.style.color = "gray";
+                    message.textContent = "No active coupons applied.";
+                }
+
+                updateCartTotal();
+            }
+        //         if (coupons.hasOwnProperty(code)) {
+        //     const { discount, minSubtotal = 0 } = coupons[code];
+        //     if (subtotal >= minSubtotal) {
+        //         appliedDiscount = discount;
+        //         localStorage.setItem("appliedCoupon", JSON.stringify({ code, discount }));
+        //         message.style.color = "green";
+        //         message.textContent = `Coupon "${code}" applied.`;
+        //     } else {
+        //         appliedDiscount = 0;
+        //         message.style.color = "red";
+        //         message.textContent = `Minimum subtotal of Ksh. ${minSubtotal} required for "${code}".`;
+        //         localStorage.removeItem("appliedCoupon");
+        //     }
+        //     } else {
+        //         appliedDiscount = 0;
+        //         message.style.color = "red";
+        //         message.textContent = "Invalid coupon code.";
+        //         localStorage.removeItem("appliedCoupon");
+        //     }
+
+        //     updateCartTotal();
+        // }
+
+            window.onload = function () {
+                loadCart();
+                 // Restore applied coupon from localStorage (after DOM is ready)
+                const savedCoupon = JSON.parse(localStorage.getItem("appliedCoupon"));
+                if (savedCoupon) {
+                    appliedDiscount = savedCoupon.discount;
+                    document.getElementById("coupon-code").value = savedCoupon.code;
+                    document.getElementById("coupon-message").textContent = `Coupon "${savedCoupon.code}" re-applied.`;
+                    document.getElementById("coupon-message").style.color = "green";
+                }
+                updateCartTotal(); // Call this to update totals with any applied discount
+                
+            };
+
+        </script>
+        <script src="products.js"></script>
+        
+        <script src="script.js"></script>
+       
+        
+    </body>    
+</html>

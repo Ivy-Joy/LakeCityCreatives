@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lake City Creatives Arts</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>    
+    <body>
+        <section id="header">
+            <a href="#"><img src="img/logo.png" class="logo" alt="logo"></a>
+            <div>
+                <ul id="navbar">
+                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="shop.html">Shop <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="shop.html?category=men">Men</a></li>
+                            <li><a href="shop.html?category=women">Women</a></li>
+                            <li><a href="shop.html?category=kids">Kids</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li id="lg-bag">
+                    <a href="cart.html">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                    </li>
+                    <a href="#" id="close"><i class="fa fa-times"></i></a>
+                </ul>  
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="fa fa-shopping-bag"></i></a>
+                <i id="bar" class="fa fa-outdent"></i>
+            </div>
+        </section>   
+         <section id="hero">
+            <h1>Welcome to Lake City Creatives Arts</h1>
+            <p>Your one-stop destination for unique and handcrafted art pieces.</p>
+            <a href="shop.html" class="btn">Shop Now</a>
+         </section>  
+        <section id="why-choose-us" class="section-p1">
+        <div class="feature-box">
+            <div class="feature">
+            <i class="fa fa-heart"></i>
+            <h4>Handcrafted with Love</h4>
+            <p>Every pair is made with cultural care and artisanal skill.</p>
+            </div>
+            <div class="feature">
+            <i class="fa fa-tag"></i>
+            <h4>Unique & Affordable</h4>
+            <p>Stand out with original designs at pocket-friendly prices.</p>
+            </div>
+            <div class="feature">
+            <i class="fa fa-lock"></i>
+            <h4>Safe Checkout</h4>
+            <p>Shop securely with our trusted and encrypted checkout.</p>
+            </div>
+            <div class="feature">
+            <i class="fa fa-truck"></i>
+            <h4>Fast Delivery</h4>
+            <p>Get your sandals delivered within 2–3 days nationwide.</p>
+            </div>
+        </div>
+        </section>
+        <section id="sm-banner" class="section-p1">
+            <h1>Shop by Category</h1>
+            <div class="container">
+                <a href="shop.html?category=women" class="pro">
+                    <img src="img/Female.png" alt="Women">
+                        <h3>Women's Sandals</h3>
+                </a>
+                <a href="shop.html?category=men" class="pro">
+                    <img src="img/Male.png" alt="Men">
+                        <h3>Men's Sandals</h3>
+                </a>
+                <a href="shop.html?category=kids" class="pro">
+                    <img src="img/Kids.png" alt="Kids">
+                        <h3>Kids' Sandals</h3>
+                </a>
+            </div>                  
+        </section>
+        <section id="best-sellers" class="section-p1">
+            <h2>Best Sellers</h2>
+            <p>Most popular products loved by customers</p>
+            <div class="pro-container" id="best-seller-list">
+                <!-- Best seller products will be injected here by JS -->
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="shop.html?bestseller=true" class="normal">View All Best Sellers</a>
+            </div>
+        </section>
+
+        <section id="banner" class="section-m1">
+            <h4>We Offer Repair Services</h4>
+            <h2>Upto <span>60% Off</span> - of All Maasai Sandals</h2>
+            <button class="normal" onclick="window.location.href='blog-post.html?id=payments'">Explore More</button>
+        </section>
+        <section id="newsletter" class="section-p1 section-m1">
+            <div class="newstext">
+                <h4>Sign Up for Newsletter</h4>
+                <p>Get E-mail updates about our latest products and <span>special offers</span>.</p>
+            </div>
+            <!-- <div class="form">
+                <input type="text" placeholder="Enter your email address">
+                <button class="normal">Sign Up</button>
+            </div> -->
+            <div class="form">
+                <input type="email" id="newsletter-email" placeholder="Enter your email address" required>
+                <button class="normal" onclick="submitEmail()">Sign Up</button>
+            </div>
+            <p id="newsletter-message" style="margin-top: 10px; color: green;"></p>
+
+        </section>
+        <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="img/logo.png" alt="logo">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> Riat, Opposite Kisumu Int. Airport</p>
+                <p><strong>Phone:</strong> +254728000000</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow Us</h4>
+                    <div class="icon">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="about.html">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="cart.html">View Cart</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track My Order</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="img/appstore.png" alt="App Store">
+                    <img src="img/google.png" alt="Google Play">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="img/paymentmethod.png" alt="Payment Methods">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025, Lake City Creatives Arts. All rights reserved.</p>
+            </div>
+        </footer>
+        <script src="products.js"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const bestSellers = products.filter(p => p.bestseller).slice(0, 3); // Only products with bestseller: true. .slice(0, 3) gets top 3 to showcase on the section.
+            const bestSellerList = document.getElementById("best-seller-list");
+
+            bestSellers.forEach(product => {
+            const productCard = `
+                <div class="pro">
+                <img src="${product.image}" alt="${product.name}" onclick="location.href='sproduct.html?id=${product.id}'">
+                <div class="des" onclick="location.href='sproduct.html?id=${product.id}'">
+                    <span>${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</span>
+                    <h5>${product.name}</h5>
+                    <div class="star">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    </div>
+                    <h4>Ksh. ${product.price}</h4>
+                </div>
+                <a href="sproduct.html?id=${product.id}"><i class="fa fa-shopping-cart cart"></i></a>
+                </div>`;
+                
+            bestSellerList.innerHTML += productCard;
+            });
+        });
+
+       
+        </script>
+
+        <script src="script.js"></script>
+    </body>    
+</html>

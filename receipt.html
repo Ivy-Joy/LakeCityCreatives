@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Lake City Creatives Arts</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+  <section id="receipt" class="section-p1">
+    <h2>Thank You for Your Order!</h2>
+    <div id="receipt-content">Loading receipt...</div>
+    <a href="shop.html" class="btn-back">← Back to Shop</a>
+  </section>
+<button onclick="window.print()" class="btn-back" style="margin-top: 20px;">🖨️ Print or Download Receipt</button>
+<!-- 🖨️ On most browsers, window.print() lets the user either print OR "Save as PDF". -->
+
+  <script>
+    const order = JSON.parse(localStorage.getItem("lastOrder"));
+    const receiptContainer = document.getElementById("receipt-content");
+
+    if (!order) {
+      receiptContainer.innerHTML = "<p style='color:red;'>No order data found. Please go back to the shop.</p>";
+    } else {
+      const orderNumber = new Date(order.timestamp).getTime();
+      let itemsHTML = "";
+      order.cart.forEach(item => {
+        itemsHTML += `<li>${item.quantity} x ${item.name} (${item.size}) - Ksh. ${(item.quantity * item.price).toFixed(2)}</li>`;
+      });
+
+      receiptContainer.innerHTML = `
+        <h3>Order #: ${orderNumber}</h3>
+
+        <h4>Customer Information</h4>
+        <p><strong>Name:</strong> ${order.customer.name}</p>
+        <p><strong>Phone:</strong> ${order.customer.phone}</p>
+        <p><strong>Email:</strong> ${order.customer.email}</p>
+        <p><strong>County:</strong> ${order.customer.county}</p>
+        <p><strong>Town/Area:</strong> ${order.customer.town}</p>
+
+        <h4>Delivery Instructions</h4>
+        <p>${order.customer.instructions || "(None)"}</p>
+
+        <h4>Items Purchased</h4>
+        <ul>${itemsHTML}</ul>
+
+        <h4>Payment</h4>
+        <p><strong>Amount Paid:</strong> Ksh. ${parseFloat(order.amountPaid).toFixed(2)}</p>
+        <p><strong>M-PESA Reference:</strong> ${order.paymentReference}</p>
+
+        <div class="success-message">We'll contact you soon to confirm your delivery.</div>
+      `;
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

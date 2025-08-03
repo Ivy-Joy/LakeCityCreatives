@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lake City Creatives Arts</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>    
+    <body>
+        <!--Header-->
+        <section id="header">
+            <a href="#"><img src="img/logo.png" class="logo" alt="logo"></a>
+            <div>
+                <ul id="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a class="active"href="shop.html">Shop <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="shop.html?category=men">Men</a></li>
+                            <li><a href="shop.html?category=women">Women</a></li>
+                            <li><a href="shop.html?category=kids">Kids</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li id="lg-bag">
+                    <a href="cart.html">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                    </li>
+                    <a href="#" id="close"><i class="fa fa-times"></i></a>
+                </ul>  
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="fa fa-shopping-bag"></i></a>
+                <i id="bar" class="fa fa-outdent"></i>
+            </div>
+        </section>   
+        <!--Product Details-->
+        <section id="prodetails" class="section-p1">
+            <div class="single-pro-image">
+                <img src="" width="100%" id="mainImg" alt="Product Image">
+                <div class="small-img-group" id="thumbnails">
+                <!-- Thumbnails will be injected/filled here dynamically -->
+                </div>
+            </div>     
+            <div class="single-pro-details">
+                <!-- <h6>Home / <span id="product-category"></span></h6> -->
+                <h6>
+                    <a href="index.html">Home</a> <i class="fa fa-angle-right"></i> 
+                    <a href="shop.html">Shop</a> <i class="fa fa-angle-right"></i> 
+                    <a id="product-category" href="#"></a>
+                </h6>
+                <h4 id="product-name">Loading...</h4>
+                <h2 id="product-price">Ksh 0</h2>
+
+                <select id="product-size">
+                <option>Select Size</option>
+                </select>
+
+                <input type="number" id="product-quantity" value="1" min="1">
+                <button class="normal" id="add-to-cart">Add To Cart</button>
+
+                <h4>Product Details</h4>
+                <span id="product-description">Loading...</span>
+            </div>
+        </section>
+         
+        <section id="newsletter" class="section-p1 section-m1">
+            <div class="newstext">
+                <h4>Sign Up for Newsletter</h4>
+                <p>Get E-mail updates about our latest products and <span>special offers</span>.</p>
+            </div>
+            <!-- <div class="form">
+                <input type="text" placeholder="Enter your email address">
+                <button class="normal">Sign Up</button>
+            </div> -->
+            <div class="form">
+                <input type="email" id="newsletter-email" placeholder="Enter your email address" required>
+                <button class="normal" onclick="submitEmail()">Sign Up</button>
+            </div>
+            <p id="newsletter-message" style="margin-top: 10px; color: green;"></p>
+        </section>
+        <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="img/logo.png" alt="logo">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> Riat, Opposite Kisumu Int. Airport</p>
+                <p><strong>Phone:</strong> +254728000000</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow Us</h4>
+                    <div class="icon">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="#">View Cart</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track My Order</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="img/appstore.png" alt="App Store">
+                    <img src="img/google.png" alt="Google Play">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="img/paymentmethod.png" alt="Payment Methods">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025, Lake City Creatives Arts. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!--Script Section-->
+        <!-- Load products -->
+        <script src="products.js"></script>
+        <script>
+            // STEP 1: Read/Get the product ID from the URL
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get("id"); // This will be a string
+
+            // STEP 2: Find the matching product from products array (loaded via products.js)
+            const selectedProduct = products.find(p => p.id === productId);
+
+            // DOM elements
+            if (selectedProduct) {
+                // STEP 3: Update the DOM with product details
+            document.getElementById("mainImg").src = selectedProduct.image;
+            document.getElementById("product-name").innerText = selectedProduct.name;
+            document.getElementById("product-price").innerText = "Ksh " + selectedProduct.price;
+            document.getElementById("product-description").innerText = selectedProduct.description;
+            // document.getElementById("product-category").innerText = selectedProduct.category;
+            const categoryLink = document.getElementById("product-category");
+            categoryLink.innerText = selectedProduct.category.charAt(0).toUpperCase() + selectedProduct.category.slice(1);
+            categoryLink.href = `shop.html?category=${selectedProduct.category}`;
+
+
+            // Create 4 thumbnails (for demo, just duplicating the same image)
+            const thumbnails = document.getElementById("thumbnails");
+            for (let i = 0; i < 4; i++) {
+            thumbnails.innerHTML += `
+                <div class="small-img-col">
+                <img src="${selectedProduct.image}" width="100%" class="small-img" alt="Thumb">
+                </div>`;
+            }
+
+            // Add event listeners for thumbnails
+            setTimeout(() => {
+            const mainImg = document.getElementById("mainImg");
+            const thumbs = document.getElementsByClassName("small-img");
+            for (let thumb of thumbs) {
+                thumb.onclick = function () {
+                mainImg.src = thumb.src;
+                };
+            }
+            }, 100);
+
+            // Populate dropdown sizes 20–43
+            const sizeSelect = document.getElementById("product-size");
+            for (let i = 20; i <= 43; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            sizeSelect.appendChild(option);
+            } 
+
+            // Add to cart logic. Js to ensure that when to user clicks the add to cart button, the product is added to cart.html
+            document.getElementById("add-to-cart").addEventListener("click", () => {
+                const size = document.getElementById("product-size").value;
+                const quantity = parseInt(document.querySelector("input[type=number]").value);
+                 const quantityInput = document.getElementById("product-quantity");
+
+                if (size === "Select Size") {
+                    alert("Please select a size.");
+                    return;
+                }
+
+                 if (isNaN(quantity) || quantity < 1) {
+                alert("Please enter a valid quantity of 1 or more.");
+                return;
+                }
+
+                const productToAdd = {
+                    id: selectedProduct.id,
+                    image: selectedProduct.image,
+                    name: selectedProduct.name,
+                    price: selectedProduct.price,
+                    quantity,
+                    size
+                };
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                // Combine if same product + same size
+                const index = cart.findIndex(item => item.id === productToAdd.id && item.size === productToAdd.size);
+
+                if (index !== -1) {
+                    cart[index].quantity += quantity;
+                } else {
+                    cart.push(productToAdd);
+                }
+
+                localStorage.setItem("cart", JSON.stringify(cart));
+                alert("Product added to cart!");
+                window.location.href = "cart.html";
+                });
+
+                } else {
+                    // Product not found
+                    document.getElementById("product-name").innerText = "Product Not Found";
+                    document.getElementById("add-to-cart").disabled = true;
+                }
+
+               
+        </script>
+                
+        <script src="script.js"></script>
+
+    </body>    
+</html>

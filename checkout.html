@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lake City Creatives Arts</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <section id="header">
+            <a href="#"><img src="img/logo.png" class="logo" alt="logo"></a>
+            <div>
+                <ul id="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="shop.html">Shop <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="shop.html?category=men">Men</a></li>
+                            <li><a href="shop.html?category=women">Women</a></li>
+                            <li><a href="shop.html?category=kids">Kids</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li id="lg-bag">
+                    <a class="active" href="cart.html">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                    </li>
+                    <a href="#" id="close"><i class="fa fa-times"></i></a>
+                </ul>  
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="fa fa-shopping-bag"></i></a>
+                <i id="bar" class="fa fa-outdent"></i>
+            </div>
+        </section> 
+  <section id="checkout" class="section-p1">
+    <h2>Checkout</h2>
+    <form id="checkout-form">
+      <h3>Customer Details</h3>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" required />
+
+      <label for="county">County:</label>
+      <input type="text" id="county" required />
+
+      <label for="town">Town/Area:</label>
+      <input type="text" id="town" required />
+
+      <label for="instructions">Delivery Instructions:</label>
+      <textarea id="instructions" rows="4"></textarea>
+
+      <h3>Order Summary</h3>
+      <p id="order-summary">Loading...</p>
+
+      <h3>Payment Method</h3>
+      <p>Please pay via M-PESA to: <strong>0792942484</strong></p>
+
+      <h4>After payment:</h4>
+      <label for="amount">Amount Paid:</label>
+      <input type="number" id="amount" min="1" required />
+
+      <label for="reference">M-PESA Reference Code:</label>
+      <input type="text" id="reference" required />
+
+      <button type="submit" class="normal" onclick="window.location.href='receipt.html'">I Have Paid</button>
+
+      <p id="confirmation-message" style="margin-top: 15px;"></p>
+    </form>
+  </section>
+  <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="img/logo.png" alt="logo">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> Riat, Opposite Kisumu Int. Airport</p>
+                <p><strong>Phone:</strong> +254728000000</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow Us</h4>
+                    <div class="icon">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="#">View Cart</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track My Order</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="img/appstore.png" alt="App Store">
+                    <img src="img/google.png" alt="Google Play">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="img/paymentmethod.png" alt="Payment Methods">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025, Lake City Creatives Arts. All rights reserved.</p>
+            </div>
+        </footer>
+
+  <script>
+    function loadOrderSummary() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const appliedCoupon = JSON.parse(localStorage.getItem("appliedCoupon"));
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+      });
+
+      let discount = appliedCoupon?.discount || 0;
+      let total = subtotal - subtotal * discount;
+
+      // Simple shipping logic
+      const county = document.getElementById("county");
+      county.addEventListener("input", () => loadOrderSummary());
+
+      let shipping = 0;
+      if (county.value.trim().toLowerCase() === "kisumu") {
+        shipping = 100;
+      } else if (county.value.trim()) {
+        shipping = 300;
+      }
+
+      total += shipping;
+
+      document.getElementById("order-summary").innerHTML = `
+        Subtotal: Ksh. ${subtotal.toFixed(2)}<br>
+        Discount: -Ksh. ${(subtotal * discount).toFixed(2)}<br>
+        Shipping: Ksh. ${shipping}<br>
+        <strong>Total: Ksh. ${total.toFixed(2)}</strong>
+      `;
+    }
+
+    loadOrderSummary();
+
+    document.getElementById("checkout-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const county = document.getElementById("county").value.trim();
+      const town = document.getElementById("town").value.trim();
+      const instructions = document.getElementById("instructions").value.trim();
+      const amount = document.getElementById("amount").value.trim();
+      const reference = document.getElementById("reference").value.trim();
+
+      if (!name || !phone || !email || !county || !town || !amount || !reference) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const order = {
+        customer: { name, phone, email, county, town, instructions },
+        amountPaid: amount,
+        paymentReference: reference,
+        timestamp: new Date().toISOString(),
+        cart: JSON.parse(localStorage.getItem("cart")) || []
+      };
+
+      // For now, save locally (can be replaced with sending to a server or Google Form)
+      localStorage.setItem("lastOrder", JSON.stringify(order));
+
+      document.getElementById("confirmation-message").innerHTML =
+        "<span style='color: green;'>Thank you! We have received your order. We'll contact you shortly to confirm delivery.</span>";
+
+      // Optionally clear cart after submission
+      localStorage.removeItem("cart");
+      localStorage.removeItem("appliedCoupon");
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
